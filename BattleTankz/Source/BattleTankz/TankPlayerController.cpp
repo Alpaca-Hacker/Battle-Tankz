@@ -1,6 +1,7 @@
 // Copyright P. Gent 2017
 
 #include "TankPlayerController.h"
+#include "Engine/World.h"
 
 void  ATankPlayerController::BeginPlay()
 {
@@ -67,15 +68,29 @@ bool ATankPlayerController::GetLookDirection(FVector& LookDirection) const
 	                               OUT LookDirection);
 }
 
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirectionVector, FVector& OutHitLocation) const
+{
+	FHitResult HitResult;
+	const auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	const auto Hit = GetWorld()->LineTraceSingleByChannel(
+		OUT HitResult,
+		StartLocation,
+		StartLocation + (LookDirectionVector * MaxAimDistance),
+		ECC_Visibility
+	);
+
+	OutHitLocation = HitResult.Location;
+	return Hit;
+}
+
 bool ATankPlayerController::GetSightRayLocation(FVector& OutHitLocation) const
 {
-	// Raycast through crosshair
-	// Find if intersects landscape
-	// if so set OutHitLocation & return true;
-	// or return false
 	FVector LookDirection;
-	GetLookDirection(OUT LookDirection);
-	OutHitLocation = LookDirection;
-	return true;
+	if (!GetLookDirection(OUT LookDirection))
+	{
+		OutHitLocation = FVector(0.00f);
+		return false;
+	}
+	return GetLookVectorHitLocation(LookDirection, OUT OutHitLocation);
 }
 

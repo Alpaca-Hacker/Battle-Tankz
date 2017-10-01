@@ -23,8 +23,11 @@ public:
 	float CrossHairLocationX = 0.5;
 	UPROPERTY(EditAnywhere)
 	float CrossHairLocationY = 0.33333;
+	UPROPERTY(EditAnywhere)
+	float MaxAimDistance = 1000000.0f;
 
 private:
+	bool GetLookVectorHitLocation(FVector LookDirectionVector, FVector& OutHitLocation) const;
 	bool GetSightRayLocation(FVector& OutHitLocation) const;
 	/// Moves barrel towards crosshairs if bullet is going to hit something.
 	void AimTowardsCrosshair();
