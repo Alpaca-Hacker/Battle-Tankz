@@ -57,18 +57,24 @@ FVector2D ATankPlayerController::GetScreenLocationOfCrossHair() const
 	return FVector2D(ViewportSizeX*CrossHairLocationX, ViewportSizeY*CrossHairLocationY);
 }
 
+bool ATankPlayerController::GetLookDirection(FVector& LookDirection) const
+{
+	const auto ScreenLocationOfCrossHair = GetScreenLocationOfCrossHair();
+	FVector CameraLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocationOfCrossHair.X,
+	                               ScreenLocationOfCrossHair.Y,
+	                               OUT CameraLocation,
+	                               OUT LookDirection);
+}
+
 bool ATankPlayerController::GetSightRayLocation(FVector& OutHitLocation) const
 {
 	// Raycast through crosshair
 	// Find if intersects landscape
 	// if so set OutHitLocation & return true;
 	// or return false
-	const auto ScreenLocationOfCrossHair = GetScreenLocationOfCrossHair();
-	FVector CameraLocation, LookDirection;
-	DeprojectScreenPositionToWorld(ScreenLocationOfCrossHair.X,
-		ScreenLocationOfCrossHair.Y,
-		CameraLocation,
-		LookDirection);
+	FVector LookDirection;
+	GetLookDirection(OUT LookDirection);
 	OutHitLocation = LookDirection;
 	return true;
 }

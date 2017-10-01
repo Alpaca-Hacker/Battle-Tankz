@@ -29,4 +29,5 @@ private:
 	/// Moves barrel towards crosshairs if bullet is going to hit something.
 	void AimTowardsCrosshair();
 	FVector2D GetScreenLocationOfCrossHair() const;
+	bool GetLookDirection(FVector& LookDirection) const;
 };
