@@ -5,25 +5,25 @@
 void  ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("Player Controller wrokign as expected"));
+	const auto Tank = GetControlledTank();
+	FString TankName = "Unknown";
+	if (Tank)
+	{
+		TankName = Tank->GetName();
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Player controlling: %s"), *TankName);
 
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	auto Tank = GetControlledTank();
-	FString TankName = "Unknown";
-	if (Tank)
-	{
-		TankName = Tank->GetName();
-	}
-	UE_LOG(LogTemp, Warning, TEXT("Name: %s"), *TankName);
+
 }
 
 ATank* ATankPlayerController::GetControlledTank() const
 {
-	auto ThisTank = GetPawn();
+	const auto ThisTank = GetPawn();
 	if (ThisTank)
 	{
 		return Cast<ATank>(ThisTank);
