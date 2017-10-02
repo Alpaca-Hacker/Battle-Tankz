@@ -22,9 +22,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void AimAt(FVector HitLocation) const;
-
+	
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelRef(UStaticMeshComponent* BarrelToSet) const;
+	void SetBarrelRef(UTankBarrel* BarrelToSet) const;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -33,6 +34,6 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:
-	UPROPERTY(EditAnywhere, CateGory = Firing)
+	UPROPERTY(EditAnywhere, Category = Setup)
 	float LaunchSpeed = 100000.0f;
 };
