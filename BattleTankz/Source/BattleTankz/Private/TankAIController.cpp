@@ -8,14 +8,19 @@
 void  ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	const auto Tank = GetPlayerTank();
-	FString TankName = "Unknown";
-	if (Tank)
-	{
-		TankName = Tank->GetName();
-	}
-	UE_LOG(LogTemp, Warning, TEXT("AI found player's tank: %s"), *TankName);
 
+}
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	auto ThisTank = GetControlledTank();
+	const auto PlayerTank = GetPlayerTank();
+	if (ThisTank && PlayerTank)
+	{
+		ThisTank->AimAt(PlayerTank->GetActorLocation());
+	}
 }
 
 ATank* ATankAIController::GetControlledTank() const
