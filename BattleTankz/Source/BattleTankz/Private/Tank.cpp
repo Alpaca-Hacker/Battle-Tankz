@@ -41,3 +41,11 @@ void ATank::AimAt(FVector HitLocation) const
 	}
 }
 
+void ATank::SetBarrelRef(UStaticMeshComponent* BarrelToSet) const
+{
+	if (TankAimingComponent)
+	{
+		TankAimingComponent->SetBarrelRef(BarrelToSet);
+	}
+}
+
