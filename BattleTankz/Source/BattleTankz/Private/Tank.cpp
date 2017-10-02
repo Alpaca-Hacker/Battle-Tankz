@@ -37,7 +37,7 @@ void ATank::AimAt(FVector HitLocation) const
 {
 	if (TankAimingComponent)
 	{
-		TankAimingComponent->AimAt(HitLocation);
+		TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 	}
 }
 
