@@ -24,7 +24,8 @@ public:
 	void SetBarrelRef(UTankBarrel* BarrelToSet) const;
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretRef(UTurret* TurretToSet) const;
-
+	UFUNCTION(BlueprintCallable, Category = Tank)
+	void Fire();
 
 protected:
 	// Called when the game starts or when spawned
@@ -34,5 +35,5 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float LaunchSpeed = 100000.0f;
+	float LaunchSpeed = 4000.0f;
 };

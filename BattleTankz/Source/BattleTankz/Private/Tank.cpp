@@ -50,3 +50,8 @@ void ATank::SetTurretRef(UTurret* TurretToSet) const
 	}
 }
 
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("BOOM!!"));
+}
+
