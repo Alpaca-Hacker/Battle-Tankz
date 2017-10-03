@@ -30,5 +30,4 @@ private:
 	UTankBarrel* Barrel = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
-	float BarrelDirection = 1.0f;
 };
