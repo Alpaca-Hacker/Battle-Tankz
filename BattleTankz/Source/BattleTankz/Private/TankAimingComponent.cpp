@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Turret.h"
 #include "public/TankBarrel.h"
 
 
@@ -39,7 +40,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!Barrel)
+	if (!Barrel || !Turret)
 	{
 		return;
 	}
@@ -76,7 +77,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto DeltaRotator = AimRotator - BarrelRotator;
 
 	auto bBarrelMoved = Barrel->Elevate(DeltaRotator.Pitch);
-
+	auto bTurretMoved = Turret->Rotate(DeltaRotator.Yaw);
 }
 
 
@@ -86,5 +87,10 @@ void UTankAimingComponent::SetBarrelRef(UTankBarrel* BarrelToSet)
 	{
 		Barrel = BarrelToSet;
 	}
+}
+
+void UTankAimingComponent::SetTurretRef(UTurret* TurretToSet)
+{
+	Turret = TurretToSet;
 }
 

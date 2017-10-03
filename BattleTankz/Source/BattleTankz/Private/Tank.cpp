@@ -42,3 +42,11 @@ void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) const
 	}
 }
 
+void ATank::SetTurretRef(UTurret* TurretToSet) const
+{
+	if (TankAimingComponent)
+	{
+		TankAimingComponent->SetTurretRef(TurretToSet);
+	}
+}
+

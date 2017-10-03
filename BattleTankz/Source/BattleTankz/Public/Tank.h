@@ -1,9 +1,9 @@
 // Copyright P. Gent 2017
-
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
+class UTurret;
 class UTankBarrel;
 class UTankAimingComponent;
 UCLASS()
@@ -22,6 +22,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelRef(UTankBarrel* BarrelToSet) const;
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretRef(UTurret* TurretToSet) const;
 
 
 protected:

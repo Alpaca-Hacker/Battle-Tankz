@@ -15,7 +15,6 @@ bool UTankBarrel::Elevate(float RelativeSpeed)
 	RawElevationChange = FMath::Clamp(RawElevationChange, MinElevation, MaxElevation);
 	if (RawElevationChange == MinElevation || RawElevationChange == MaxElevation)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Barrel can't move"));
 		return false;
 	}
 

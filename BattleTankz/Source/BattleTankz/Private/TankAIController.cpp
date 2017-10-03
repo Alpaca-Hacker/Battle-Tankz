@@ -38,6 +38,11 @@ ATank* ATankAIController::GetControlledTank() const
 ATank* ATankAIController::GetPlayerTank() const
 {
 	const auto PlayerController= Cast<ATankPlayerController>(GetWorld()->GetFirstPlayerController());
+	if (!PlayerController)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Player Controller Not Found!!"));
+		return nullptr;
+	}
 	const auto PlayerTank = PlayerController->GetControlledTank();
 
 	if (PlayerTank)

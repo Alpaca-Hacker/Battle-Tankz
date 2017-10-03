@@ -1,11 +1,11 @@
 // Copyright P. Gent 2017
 
 #pragma once
-
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
-class UTankBarrel; 
+class UTurret;
+class UTankBarrel;
 //Aims the barrel and turret
 UCLASS( ClassGroup=(Tank), meta=(BlueprintSpawnableComponent) )
 class BATTLETANKZ_API UTankAimingComponent : public UActorComponent
@@ -21,6 +21,7 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 	void SetBarrelRef(UTankBarrel* BarrelToSet);
+	void SetTurretRef(UTurret* TurretToSet);
 
 protected:
 	// Called when the game starts
@@ -28,6 +29,7 @@ protected:
 
 private:
 	UTankBarrel* Barrel = nullptr;
+	UTurret* Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
 };
