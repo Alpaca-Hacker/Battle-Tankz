@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
-class UTurret;
+class AProjectile; class UTurret;
 class UTankBarrel;
 class UTankAimingComponent;
 UCLASS()
@@ -21,7 +21,7 @@ public:
 	void AimAt(FVector HitLocation) const;
 	
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelRef(UTankBarrel* BarrelToSet) const;
+	void SetBarrelRef(UTankBarrel* BarrelToSet);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretRef(UTurret* TurretToSet) const;
 	UFUNCTION(BlueprintCallable, Category = Tank)
@@ -36,4 +36,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float LaunchSpeed = 4000.0f;
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> Projectile;
+	UTankBarrel* Barrel = nullptr;
 };

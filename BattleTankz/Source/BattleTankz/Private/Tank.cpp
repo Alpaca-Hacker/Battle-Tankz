@@ -1,7 +1,9 @@
 // Copyright P. Gent 2017
 #include "public/Tank.h"
 #include "public/TankAimingComponent.h"
-
+#include "Engine/World.h"
+#include "public/TankBarrel.h"
+#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -34,8 +36,9 @@ void ATank::AimAt(FVector HitLocation) const
 	}
 }
 
-void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) const
+void ATank::SetBarrelRef(UTankBarrel* BarrelToSet)
 {
+	Barrel = BarrelToSet;
 	if (TankAimingComponent)
 	{
 		TankAimingComponent->SetBarrelRef(BarrelToSet);
@@ -52,6 +55,13 @@ void ATank::SetTurretRef(UTurret* TurretToSet) const
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("BOOM!!"));
+	if (!Projectile || !Barrel)
+	{
+		return;
+	}
+	//UE_LOG(LogTemp, Warning, TEXT("BOOM!!"));
+	const auto SpawnPoint = Barrel->GetSocketLocation(FName("Projectile"));
+	const auto SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
+	GetWorld()->SpawnActor<AProjectile>(Projectile, SpawnPoint, SpawnRotation);
 }
 
