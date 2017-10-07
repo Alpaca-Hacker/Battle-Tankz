@@ -3,8 +3,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
-class AProjectile; class UTurret;
-class UTankBarrel;
+
+class AProjectile; class UTurret; class UTankBarrel;
 class UTankAimingComponent;
 UCLASS()
 class BATTLETANKZ_API ATank : public APawn
