@@ -9,49 +9,23 @@ void  ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
+
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	// Possible pointer errors here, but hey!
+	auto ThisTank = Cast<ATank>(GetPawn());
+	const auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	auto ThisTank = GetControlledTank();
-	const auto PlayerTank = GetPlayerTank();
 	if (ThisTank && PlayerTank)
 	{
 		ThisTank->AimAt(PlayerTank->GetActorLocation());
+		ThisTank->Fire();
+
 	}
 }
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	const auto ThisTank = GetPawn();
-	if (ThisTank)
-	{
-		return Cast<ATank>(ThisTank);
-	}
-	UE_LOG(LogTemp, Error, TEXT("Tank Not Found!!"));
-	return nullptr;
-
-}
-
-ATank* ATankAIController::GetPlayerTank() const
-{
-	const auto PlayerController= Cast<ATankPlayerController>(GetWorld()->GetFirstPlayerController());
-	if (!PlayerController)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Player Controller Not Found!!"));
-		return nullptr;
-	}
-	const auto PlayerTank = PlayerController->GetControlledTank();
-
-	if (PlayerTank)
-	{
-		return Cast<ATank>(PlayerTank);
-	}
-	UE_LOG(LogTemp, Error, TEXT("Player Tank Not Found!!"));
-	return nullptr;
-
-}
 
 
