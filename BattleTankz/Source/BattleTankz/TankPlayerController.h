@@ -19,11 +19,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	ATank* GetControlledTank() const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairLocationX = 0.5;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairLocationY = 0.33333;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float MaxAimDistance = 1000000.0f;
 
 private:
