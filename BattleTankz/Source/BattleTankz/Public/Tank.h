@@ -5,7 +5,7 @@
 #include "Tank.generated.h"
 
 class AProjectile; class UTurret; class UTankBarrel;
-class UTankAimingComponent;
+class UTankAimingComponent; class UTankMovementComponent;
 UCLASS()
 class BATTLETANKZ_API ATank : public APawn
 {
@@ -32,6 +32,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
