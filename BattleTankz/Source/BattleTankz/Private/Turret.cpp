@@ -11,7 +11,7 @@ bool UTurret::Rotate(float RelativeSpeed)
 	}
 	RelativeSpeed = FMath::Clamp(RelativeSpeed, -1.0f, 1.0f);
 	const auto RotationChange = RelativeSpeed * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
-	auto RawRotationChange = RelativeRotation.Yaw + RotationChange;
+	const auto RawRotationChange = RelativeRotation.Yaw + RotationChange;
 	//RawElevationChange = FMath::Clamp(RawElevationChange, MinElevation, MaxElevation);
 	if (RawRotationChange == 0)
 	{

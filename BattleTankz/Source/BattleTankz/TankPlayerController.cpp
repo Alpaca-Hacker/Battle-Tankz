@@ -13,7 +13,7 @@ void  ATankPlayerController::BeginPlay()
 	{
 		TankName = Tank->GetName();
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Player controlling: %s"), *TankName);
+
 
 }
 
