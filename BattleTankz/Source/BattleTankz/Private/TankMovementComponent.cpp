@@ -5,21 +5,28 @@
 
 void UTankMovementComponent::Initialise(UTankTracks* LeftTrackToSet, UTankTracks* RightTrackToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet)
-	{
-		return;
-	}
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 }
 
-void UTankMovementComponent::SetForwardIntent(float ForwardIntent)
+void UTankMovementComponent::SetForwardIntent(float ForwardIntent) const
 {
-	UE_LOG(LogTemp, Warning, TEXT("Throttling: %f"), ForwardIntent);
 	if (!LeftTrack || !RightTrack)
 	{
 		return;
 	}
 	LeftTrack->SetThrottle(ForwardIntent);
 	RightTrack->SetThrottle(ForwardIntent);
+}
+
+void UTankMovementComponent::SetRightIntent(float RightIntent) const
+{
+	UE_LOG(LogTemp, Warning, TEXT("Throttling: %f"), RightIntent);
+
+	if (!LeftTrack || !RightTrack)
+	{
+		return;
+	}
+	LeftTrack->SetThrottle(-RightIntent);
+	RightTrack->SetThrottle(RightIntent);
 }

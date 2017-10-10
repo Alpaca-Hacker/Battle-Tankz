@@ -18,7 +18,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Initialise(UTankTracks* LeftTrackToSet, UTankTracks* RightTrackToSet);
 	UFUNCTION(BlueprintCallable, Category = Input)
-	void SetForwardIntent(float ForwardIntent);
+	void SetForwardIntent(float ForwardIntent) const;
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void SetRightIntent(float RightIntent) const;
 
 private:
 	UTankTracks* LeftTrack = nullptr;
